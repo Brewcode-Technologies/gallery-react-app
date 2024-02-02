@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const { REACT_APP_PIXABAY_ENDPOINTS, REACT_APP_PIXABAY_API_KEY } = process.env;
+
 // async action for fetching images 
 export const fetchSearch = createAsyncThunk(
     "search/fetchSearch",
     async (imgName) => {
         try {
             const response = await axios.get(
-                `https://pixabay.com/api/?key=25850788-198f1932e82eefef8db8d5b36&q=${imgName}&image_type=photo`
+                `${REACT_APP_PIXABAY_ENDPOINTS}/?key=${REACT_APP_PIXABAY_API_KEY}&q=${imgName}&image_type=photo`
             );
             return response.data.hits;
         } catch (error) {
